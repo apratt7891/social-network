@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.3"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "social-network",
+  "description": "Social Network",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apratt7891/social-network.git"
+  },
+  "author": "apratt7891",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apratt7891/social-network/issues"
+  },
+  "homepage": "https://github.com/apratt7891/social-network#readme"
+}
