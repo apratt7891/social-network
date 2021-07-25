@@ -13,7 +13,7 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: [validateEmail, 'Please enter a valid email address'],
+            validate: [/.+@.+\..+/, 'Please enter a valid email address'],
         },
         createdAt: {
             type: Date,
