@@ -2,7 +2,7 @@
   
 
 ## Description
-🔍 This is an APU for a social network web application. Users can share their thoughts, react to friends' thoughts and more! This API was built using Mongoose with a MongoDB server.
+🔍 This is an API for a social network web application. Users can share their thoughts, react to friends' thoughts and more! This API was built using Mongoose with a MongoDB server.
 ## Table of Contents
 - [Description](#description)
 - [Installation](#install)
@@ -16,6 +16,7 @@
  Insomnia was used as an API testing for this application.
 ## Usage
 Check out a demo of the video below.
+<br>
 💻 <a href="https://www.youtube.com/watch?v=miMLecGf79g" alt="youtube video"></a>
 https://www.youtube.com/watch?v=miMLecGf79g
 ## License
