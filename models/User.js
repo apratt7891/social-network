@@ -1,4 +1,4 @@
-const { Schema, model, Thought } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const UserSchema = new Schema(
@@ -14,14 +14,31 @@ const UserSchema = new Schema(
             required: true,
             unique: true,
             validate: [validateEmail, 'Please enter a valid email address'],
-            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
-
-        }
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: createdAtVal => dateFormat(createdAtVal)
+        },
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
+        ],
+        friends: []
+    },
+        {
+            toJSON: {
+            virtuals: true,
+            getters: true
+    },
+        id: false
     }
-)
+);
 
 UserSchema.virtual('friendCount').get(function() {
-    return this.friends.reduce((total, friends) => total + friends.length + 1,0);
+    return this.friends.length 
 });
 
 const User = model('User', UserSchema);
