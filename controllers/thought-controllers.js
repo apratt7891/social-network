@@ -13,24 +13,20 @@ const thoughtController = {
   },
   // get a single thought by id
   getThoughtById({ params }, res) {
-    Thought.findOne({ _id: params.thoughtId })
-        .populate({
-            path: 'reactions',
-            select: ('-__v')
-        })
-        .select('-__v')
-        .then(dbThoughtData => {
-            if (!dbThoughtData) {
-                res.status(404).json({ message: 'No thought found with this id' });
-                return;
-            }
-            res.json(dbThoughtData)
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(400).json(err);
-        });
-},
+    Thought.findOne({ _id: params.id })
+      .then((dbThoughtData) => {
+        // if no thought is found
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought with this ID" });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
     // create a thought
     createThought({ params, body }, res) {
         Thought.create(body)
