@@ -10,7 +10,7 @@ const ReactionSchema = new Schema(
         reactionBody: {
             type: String,
             required: true,
-            trim: true
+            validate:[/[a-zA-Z]{0,280}/, 'Reaction cannot exceed 280 characters.']
         },
         username: {
             type: String,
@@ -19,8 +19,13 @@ const ReactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: createdAtVal => dateFormat(createdAtVal)  
-        }    
+            get: (createdAtVal) => dateFormat(createdAtVal)
+        },
+    },
+    {
+        toJSON: {
+            getters: true
+        }
     }
 );
 
@@ -30,32 +35,31 @@ const ThoughtSchema = new Schema(
             type: String,
             required: true,
             validate: [/[a-zA-Z]{1,280}/, 'Please enter between 1 and 280 characters.'] 
-           
         },
         createdAt: {
             type: Date,
             default: Date.now,
-            get: createdAtVal => dateFormat(createdAtVal)
+            get: (createdAtVal) => dateFormat(createdAtVal)
         },
         username: {
             type: String,
             required: true
         },
         reactions: [ReactionSchema]
+
     },
     {
         toJSON: {
-            virtual: true,
+            virtuals: true,
             getters: true
-          },
-          id: false
-        }
-        
-); 
+        },
+        id: false
+    }
+);
 
-
+// get length of reactions array
 ThoughtSchema.virtual('reactionCount').get(function() {
-    return this.reactionslength 
+    return this.reactions.length
 });
 
 const Thought = model('Thought', ThoughtSchema);
